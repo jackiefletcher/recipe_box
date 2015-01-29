@@ -43,7 +43,7 @@ end
 patch("/recipes/:id") do
   recipe_id = params.fetch("id").to_i()
   @recipe = Recipe.find(recipe_id)
-  ingredient_ids = params.fetch("ingredient_ids")
+  ingredient_ids = params.fetch("ingredient_ids") + @recipe.ingredient_ids
   @recipe.update({:ingredient_ids => ingredient_ids})
   @ingredients = Ingredient.all()
   erb(:recipe_info)

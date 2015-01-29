@@ -1,9 +1,10 @@
 <h1>Recipe Box</h1>
 
+<p><a href="/categories">Add a new category</a></p>
 <p><a href="/recipes">Add a new recipe</a></p>
 <p><a href="/ingredients">Add a new ingredient</a></p>
 
-<h3>Here are all the ingredients in the database:</h3>
+<h3>Here are all the ingredients:</h3>
 
 <% if @ingredients.any?() %>
   <p>Click on an ingredient to see information about them and mark which recipes they belong to:</p>
@@ -17,8 +18,21 @@
   <p>There are no ingredients added yet</p>
 <% end %>
 
-<h3>Here are all the recipes in the database:</h3>
+<h3>Here are all the recipes:</h3>
 
+<% if @recipes.any?() %>
+  <p>Click on a recipe to see information about it and add ingredients:</p>
+
+  <ul>
+    <% @recipes.alphabetical().each do |recipe| %>
+      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>There are no recipes</p>
+  <% end %>
+
+<h3>Here are all the categories:</h3>
 <% if @recipes.any?() %>
   <p>Click on a recipe to see information about it and add ingredients:</p>
 
