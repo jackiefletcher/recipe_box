@@ -6,4 +6,9 @@ describe(Recipe) do
     recipe = Recipe.new({:name => ''})
     expect(recipe.save()).to(eq(false))
   end
+
+  it("will capitalize the name of the recipe") do
+    recipe = Recipe.create({:name => "eggs benedict"})
+    expect(recipe.name()).to(eq("Eggs benedict"))
+  end
 end
