@@ -1,0 +1,30 @@
+<h1>Welcome to the Ingredients page</h1>
+
+
+<p>Add an ingredient to the database:</p>
+
+<form action="/ingredients" method="post">
+  <label for="food">Ingredients name:</label>
+  <br>
+  <input id="food" name="food" type="text">
+<br>
+<br>
+  <button type="submit">Add ingredient</button>
+</form>
+
+<% if @ingredients.any?() %>
+  <p>Click on an ingredient to see information about them and to assign them to different recipes</p>
+
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+      <li><a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.food() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+<br>
+  <p>There are no ingredients added yet</p>
+<% end %>
+
+<p><a href="/recipes">See all recipes</a></p>
+
+<p><a href="/">Return to main page</a></p>

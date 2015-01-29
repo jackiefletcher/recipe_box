@@ -18,5 +18,18 @@ post('/recipes') do
   name = params.fetch("name")
   instruction = params.fetch("instruction")
   Recipe.create({:name => name, :instruction => instruction})
+  @recipes = Recipe.all()
   erb(:recipe)
+end
+
+get('/ingredients') do
+  @ingredients = Ingredient.all()
+  erb(:ingredient)
+end
+
+post('/ingredients') do
+  food = params.fetch('food')
+  Ingredient.create({:food => food})
+  @ingredients = Ingredient.all()
+  erb(:ingredient)
 end
