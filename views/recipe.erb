@@ -1,0 +1,32 @@
+<h1>Welcome to the Recipe page</h1>
+
+
+<p>Add a recipe to the database:</p>
+
+<form action="/recipes" method="post">
+  <label for="name">Recipe name:</label>
+  <br>
+  <input id="name" name="name" type="text">
+<br>
+  <label for="instruction">Instructions:</label>
+  <textarea class="form-control" rows="3" id="instruction" name="instruction"></textarea>
+<br>
+  <button type="submit">Add recipe</button>
+</form>
+
+<% if @recipes.any?() %>
+  <p>Click on a recipe to see information about them and to assign them to different ingredients</p>
+
+  <ul>
+    <% recipes.each do |recipe| %>
+      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+<br>
+  <p>There are no recipes added yet</p>
+<% end %>
+
+<p><a href="/ingredients">See all ingredients</a></p>
+
+<p><a href="/">Return to main page</a></p>
