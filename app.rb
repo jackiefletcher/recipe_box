@@ -6,6 +6,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 get('/') do
   @ingredients = Ingredient.all()
   @recipes = Recipe.all()
+  @categories = Category.all()
   erb(:index)
 end
 
@@ -34,6 +35,18 @@ post('/ingredients') do
   erb(:ingredient)
 end
 
+get('/categories') do
+  @categories = Category.all()
+  erb(:category)
+end
+
+post('/categories') do
+  description = params.fetch("description")
+  Category.create({:description => description})
+  @categories = Category.all()
+  erb(:category)
+end
+
 get("/recipes/:id") do
   @ingredients = Ingredient.all()
   @recipe = Recipe.find(params.fetch("id").to_i())
@@ -58,8 +71,23 @@ end
 patch("/ingredients/:id") do
   ingredient_id = params.fetch("id").to_i()
   @ingredient = Ingredient.find(ingredient_id)
-  recipe_ids = params.fetch("recipe_ids")
+  recipe_ids = params.fetch("recipe_ids") + @ingredient.recipe_ids
   @ingredient.update({:recipe_ids => recipe_ids})
   @recipes = Recipe.all()
   erb(:ingredient_info)
+end
+
+get("/categories/:id") do
+  @recipes = Recipe.all()
+  @category = Category.find(params.fetch("id").to_i())
+  erb(:category_info)
+end
+
+patch("/categories/:id") do
+  category_id = params.fetch("id").to_i()
+  @category = Category.find(category_id)
+  recipe_ids = params.fetch("recipe_ids") + @category.recipe_ids
+  @category.update({:recipe_ids => recipe_ids})
+  @recipes = Recipe.all()
+  erb(:category_info)
 end

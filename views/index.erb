@@ -10,7 +10,7 @@
   <p>Click on an ingredient to see information about them and mark which recipes they belong to:</p>
 
   <ul>
-    <% @ingredients.each do |ingredient| %>
+    <% @ingredients.alphabetical().each do |ingredient| %>
       <li><a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.food() %></a></li>
     <% end %>
   </ul>
@@ -33,14 +33,14 @@
   <% end %>
 
 <h3>Here are all the categories:</h3>
-<% if @recipes.any?() %>
-  <p>Click on a recipe to see information about it and add ingredients:</p>
+<% if @categories.any?() %>
+  <p>Click on a category to see information about it and add recipes:</p>
 
   <ul>
-    <% @recipes.each do |recipe| %>
-      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+    <% @categories.each do |category| %>
+      <li><a href="/categories/<%= category.id() %>"><%= category.description() %></a></li>
       <% end %>
   </ul>
   <% else %>
-    <p>There are no recipes</p>
+    <p>There are no categories</p>
   <% end %>

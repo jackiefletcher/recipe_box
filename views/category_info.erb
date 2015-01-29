@@ -1,0 +1,35 @@
+<h1><%= @category.description() %></h1>
+
+<h3>Select all recipes for this category:</h3>
+
+<% if @recipes.any?() %>
+  <form action="/categories/<%= @category.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @recipes.each() do |recipe| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="recipe_ids[]" value="<%= recipe.id() %>"><%= recipe.name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add recipes</button>
+  </form>
+<% end %>
+
+<br>
+
+<% if @category.recipes().any?() %>
+  <h3>Here are all the recipes in this category:</h3>
+
+  <ul>
+    <% @category.recipes().each() do |recipe| %>
+      <li><%= recipe.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no recipes yet!</p>
+<% end %>
+
+<a href="/">Return to Main Page</a>

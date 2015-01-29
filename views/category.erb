@@ -1,0 +1,30 @@
+<h1>Welcome to the Category page</h1>
+
+
+<p>Add a category:</p>
+
+<form action="/categories" method="post">
+  <label for="description">Category decription:</label>
+  <br>
+  <input id="description" name="description" type="text">
+<br>
+<br>
+  <button type="submit">Add category</button>
+</form>
+
+<% if @categories.any?() %>
+  <p>Click on a category to see information about them and to assign them recipes</p>
+
+  <ul>
+    <% @categories.each do |category| %>
+      <li><a href="/categories/<%= category.id() %>"><%= category.description() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+<br>
+  <p>There are no categories added yet</p>
+<% end %>
+
+<p><a href="/recipes">See all recipes</a></p>
+
+<p><a href="/">Return to main page</a></p>
