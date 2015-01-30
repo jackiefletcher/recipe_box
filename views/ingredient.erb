@@ -17,7 +17,7 @@
   <p>Click on an ingredient to see information about them and to assign them to different recipes</p>
 
   <ul>
-    <% @ingredients.each do |ingredient| %>
+    <% @ingredients.alphabetical().each do |ingredient| %>
       <li><a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.food() %></a></li>
     <% end %>
   </ul>

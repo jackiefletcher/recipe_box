@@ -62,6 +62,34 @@ patch("/recipes/:id") do
   erb(:recipe_info)
 end
 
+patch("/recipes/:id/edit/name") do
+  recipe_id = params.fetch("id").to_i()
+  name = params.fetch("name")
+  @recipe = Recipe.find(recipe_id)
+  @recipe.update({:name => name})
+  @ingredients = Ingredient.all()
+  erb(:recipe_info)
+end
+
+patch("/recipes/:id/edit/instruction") do
+  recipe_id = params.fetch("id").to_i()
+  instruction = params.fetch("instruction")
+  @recipe = Recipe.find(recipe_id)
+  @recipe.update({:instruction => instruction})
+  @ingredients = Ingredient.all()
+  erb(:recipe_info)
+end
+
+delete("/recipes/:id/delete") do
+  recipe_id = params.fetch("id").to_i()
+  @recipe = Recipe.find(recipe_id)
+  @recipe.delete()
+  @ingredients = Ingredient.all()
+  @recipes = Recipe.all()
+  @categories = Category.all()
+  erb(:index)
+end
+
 get("/ingredients/:id") do
   @recipes = Recipe.all()
   @ingredient = Ingredient.find(params.fetch("id").to_i())

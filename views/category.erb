@@ -16,7 +16,7 @@
   <p>Click on a category to see information about them and to assign them recipes</p>
 
   <ul>
-    <% @categories.each do |category| %>
+    <% @categories.alphabetical().each do |category| %>
       <li><a href="/categories/<%= category.id() %>"><%= category.description() %></a></li>
     <% end %>
   </ul>

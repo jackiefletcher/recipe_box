@@ -6,7 +6,7 @@
   <form action="/recipes/<%= @recipe.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
 
-    <% @ingredients.each() do |ingredient| %>
+    <% @ingredients.alphabetical().each() do |ingredient| %>
       <div class="checkbox">
         <label>
           <input type="checkbox" name="ingredient_ids[]" value="<%= ingredient.id() %>"><%= ingredient.food() %>
@@ -24,7 +24,7 @@
   <h3>Here are all the ingredients in this recipe:</h3>
 
   <ul>
-    <% @recipe.ingredients().each() do |ingredient| %>
+    <% @recipe.ingredients().alphabetical().each() do |ingredient| %>
       <li><%= ingredient.food() %></li>
     <% end %>
   </ul>
@@ -35,5 +35,26 @@
 <h3>Instructions:</h3>
 <p> <%= @recipe.instruction() %></p>
 
+<h3>Update <%= @recipe.name() %></h3>
+
+<form action="/recipes/<%= @recipe.id() %>/edit/name" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="name">Rename Recipe:</label>
+  <input id="name" name="name" type="text">
+  <button type="submit">Update</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id() %>/edit/instruction" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="instruction">Change Instructions:</label>
+  <input id="instruction" name="instruction" type="text">
+  <button type="submit">Update</button>
+</form>
+
+<h3>Delete <%= @recipe.name() %></h3>
+<form action="/recipes/<%= @recipe.id() %>/delete" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete</button>
+</form>
 
 <a href="/">Return to Main Page</a>

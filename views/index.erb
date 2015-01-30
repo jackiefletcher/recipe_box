@@ -1,8 +1,8 @@
 <h1>Recipe Box</h1>
 
-<p><a href="/categories">Add a new category</a></p>
-<p><a href="/recipes">Add a new recipe</a></p>
 <p><a href="/ingredients">Add a new ingredient</a></p>
+<p><a href="/recipes">Add a new recipe</a></p>
+<p><a href="/categories">Add a new category</a></p>
 
 <h3>Here are all the ingredients:</h3>
 
@@ -37,7 +37,7 @@
   <p>Click on a category to see information about it and add recipes:</p>
 
   <ul>
-    <% @categories.each do |category| %>
+    <% @categories.alphabetical().each do |category| %>
       <li><a href="/categories/<%= category.id() %>"><%= category.description() %></a></li>
       <% end %>
   </ul>

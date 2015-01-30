@@ -6,7 +6,7 @@
   <form action="/ingredients/<%= @ingredient.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
 
-    <% @recipes.each() do |recipe| %>
+    <% @recipes.alphabetical().each() do |recipe| %>
       <div class="checkbox">
         <label>
           <input type="checkbox" name="recipe_ids[]" value="<%= recipe.id() %>"><%= recipe.name() %>
@@ -24,7 +24,7 @@
   <h3>Here are all the recipes with this ingredient:</h3>
 
   <ul>
-    <% @ingredient.recipes().each() do |recipe| %>
+    <% @ingredient.recipes().alphabetical().each() do |recipe| %>
       <li><%= recipe.name() %></li>
     <% end %>
   </ul>
